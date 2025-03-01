@@ -18,11 +18,11 @@ public class HoaDon {
     private String maHoaDon;
 
     @ManyToOne
-    @JoinColumn(name = "maHoaDon",referencedColumnName = "maNhanVien")
+    @JoinColumn(name = "maNhanVien",referencedColumnName = "maNhanVien")
     private NhanVien nhanVien;
 
     @ManyToOne
-    @JoinColumn(name = "maHoaDon",referencedColumnName = "maKhachHang")
+    @JoinColumn(name = "maKhachHang",referencedColumnName = "maKhachHang")
     private KhachHang khachHang;
 
     private Date ngayLap;

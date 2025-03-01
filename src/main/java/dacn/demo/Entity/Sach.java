@@ -20,15 +20,15 @@ public class Sach {
     private String tenSach;
 
     @ManyToOne
-    @JoinColumn(name = "maSach",referencedColumnName = "maTacGia")
+    @JoinColumn(name = "maTacGia",referencedColumnName = "maTacGia")
     private TacGia tacGia;
 
     @ManyToOne
-    @JoinColumn(name = "maSach", referencedColumnName = "maTheLoai")
+    @JoinColumn(name = "maTheLoai", referencedColumnName = "maTheLoai")
     private TheLoai theLoai;
 
     @ManyToOne
-    @JoinColumn(name = "maSach", referencedColumnName = "maNhaXuatBan")
+    @JoinColumn(name = "maNhaXuatBan", referencedColumnName = "maNhaXuatBan")
     private NhaXuatBan nhaXuatBan;
     private int soLuongTon;
     private double giaBan;

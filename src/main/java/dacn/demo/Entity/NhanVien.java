@@ -1,5 +1,6 @@
 package dacn.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -23,11 +24,12 @@ public class NhanVien {
     private String matKhau;
     private String tenNhanVien;
     private String gioiTinh;
-    private Date ngaySinh;
+    private String ngaySinh;
     private String diaChi;
     private String sdt;
     private String email;
     private String vaiTro;
+    @JsonIgnore
     @OneToMany(mappedBy = "nhanVien",cascade = CascadeType.ALL)
     private List<HoaDon> hoaDon;
 }

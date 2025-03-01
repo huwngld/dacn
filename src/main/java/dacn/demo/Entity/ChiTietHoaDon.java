@@ -17,11 +17,11 @@ public class ChiTietHoaDon {
     private int maChiTietHoaDon;
 
     @ManyToOne
-    @JoinColumn(name = "maChiTietHoaDon",referencedColumnName = "maHoaDon")
+    @JoinColumn(name = "maHoaDon",referencedColumnName = "maHoaDon")
     private HoaDon hoaDon;
 
     @ManyToOne
-    @JoinColumn(name = "maChiTietHoaDon", referencedColumnName = "maSach")
+    @JoinColumn(name = "maSach", referencedColumnName = "maSach")
     private Sach sach;
 
     private int soLuong;

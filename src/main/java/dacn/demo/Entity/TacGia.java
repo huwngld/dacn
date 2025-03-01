@@ -18,7 +18,7 @@ public class TacGia {
     private int maTacGia;
     private String tenTacGia;
     private String gioiTinh;
-    private Date ngaySinh;
+    private String ngaySinh;
     private String diaChi;
     private String sdt;
     private String email;
