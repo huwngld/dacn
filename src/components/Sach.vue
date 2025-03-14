@@ -6,7 +6,10 @@ const danhSach2 = ref([]);
 const danhSach3 = ref([]);
 
 onMounted(() => {
-    axios.get("http://localhost:8080/admin/sach/")
+    if(localStorage.getItem("token") === null){
+            window.location.href = "/"
+        }
+    axios.get("http://localhost:8080/sach/")
         .then(response => {
             const data = response.data;
             danhSach1.value = data.ds1 || [];
@@ -17,7 +20,7 @@ onMounted(() => {
             console.error("Lỗi khi lấy dữ liệu:", error);
         });
 });
-
+let token = JSON.parse(localStorage.getItem("token"))
 const dl = ref({
     imgFile: null,
     tenSach: '',
@@ -49,15 +52,15 @@ const getDl = () => {
     formData.append('soLuongTon', dl.value.soLuongTon);
     formData.append('giaBan', dl.value.giaBan);
     
-    axios.post("http://localhost:8080/sach/add", formData, {
+    axios.post("http://localhost:8080/admin/add-sach", formData, {
         headers: {
-            'Content-Type': 'multipart/form-data'
+            'Content-Type': 'multipart/form-data',
+            Authorization: `Bearer ${token}`
         }
     })
     .then(response => {
         console.log("Thêm sách thành công:", response.data);
-        // Reset form sau khi thêm thành công nếu cần
-        // resetForm();
+        alert('Thêm sách thành công')
     })
     .catch(error => {
         console.error("Lỗi khi thêm sách:", error);
@@ -68,7 +71,7 @@ const getDl = () => {
 </script>
 
 <template>
-    <form @submit.prevent="getDl" method="post" enctype="multipart/form-data">
+    <form @submit.prevent="getDl" method="post" enctype="multipart/form-data" class="p-5">
         <div class="mb-3">
             <label for="img" class="form-label">Hình Ảnh</label>
             <input type="file" class="form-control" id="img" @change="handleFileUpload">
@@ -116,7 +119,6 @@ const getDl = () => {
             <input type="number" step="0.01" class="form-control" id="giaBan" v-model="dl.giaBan" required>
         </div>
 
-        <button type="submit" class="btn btn-primary" name="button" value="add" @click="test">Lưu Sách</button>
-        <button type="submit" class="btn btn-primary" name="button" value="update" @click="test">Update</button>
+        <button type="submit" class="btn btn-primary m-5" name="button" value="add" @click="test">Lưu Sách</button>
     </form>
 </template>

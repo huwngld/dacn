@@ -4,11 +4,8 @@ import { onMounted, ref } from 'vue';
 import { useRoute } from 'vue-router';
 
 
-
-const route = useRoute();
-const id = route.params.ma;
-const randomNumber = Math.floor(Math.random() * 1000) + 1;
-
+const randomNumber = Math.floor(Math.random() * 1000) + 1;   
+let gioHang = JSON.parse(localStorage.getItem("gioHang"));
 let login = ref(false)
 if(JSON.parse(localStorage.getItem('dataKH'))!==null){
     login.value = true
@@ -20,22 +17,18 @@ if(JSON.parse(localStorage.getItem('dataKH'))!==null){
 let dataKH = JSON.parse(localStorage.getItem('dataKH'))
 
 
-
-let getData = ref({
-    maSach:"0",
-    giaBan: "1", 
-    tenSach: "1",
-})
-
-axios.get(`http://localhost:8080/sach/details/${id}`).then(Response =>{
-    getData.value = Response.data.result   
-  })
-
-
 let qrcode=ref({
     gt:""
 })
 
+
+let getData =ref({
+    giaBan: 0
+    }
+)
+for(let i = 0;i<gioHang.length;i++){
+    getData.value.giaBan = getData.value.giaBan +gioHang[i].amount;
+}
 
 let ttkh = ref({
     orderCode: randomNumber,
@@ -45,14 +38,7 @@ let ttkh = ref({
     buyerName: dataKH!==null?dataKH.tenKhachHang:"",
     buyerPhone:  dataKH!==null?dataKH.tenKhachHang:"",
     buyerAddress:  dataKH!==null?dataKH.tenKhachHang:"",
-    items:[
-        {
-            maSach: getData.value.maSach,
-            name: getData.value.tenSach,
-            quantity: 1,
-            price: getData.value.giaBan,
-        }
-    ],
+    items: gioHang,
     cancelUrl: "http://localhost:5173/that-bai",
     returnUrl: "http://localhost:5173/thanh-cong",
     signature: ""
@@ -63,12 +49,7 @@ let dl = ref({
 let f = ref()
     
     const callApi = async() =>{        
-        ttkh.value.items[0].name=getData.value.tenSach
-        ttkh.value.items[0].price=getData.value.giaBan
         ttkh.value.amount = getData.value.giaBan
-        ttkh.value.price = getData.value.giaBan
-        ttkh.value.name = getData.value.tenSach
-        ttkh.value.items[0].maSach = getData.value.maSach
         console.log(ttkh.value);
         dl.value.data = "{'amount':"+ttkh.value.amount+",'cancelUrl':'"+ ttkh.value.cancelUrl+"','description':'"+ttkh.value.description +"','orderCode':"+ randomNumber +",'returnUrl':'"+ ttkh.value.returnUrl+"'}"
     await axios.post("http://localhost:8080/convert",dl.value,{
@@ -92,18 +73,14 @@ const call = () =>{
             "x-api-key": "2dcc721a-fa13-4ff6-80ca-7b6b89a81749"
         }
     }).then(Response =>{
-        localStorage.setItem("ttkh",JSON.stringify(ttkh.value))        
+        localStorage.setItem("ttkh",JSON.stringify(ttkh.value))
+        console.log(JSON.parse(localStorage.getItem("ttkh")));
+        // window.location.href = "/thanh-cong"
         window.location.href = Response.data.data.checkoutUrl
     })
 }
 const test =async ()=>{
     if(qrcode.value.gt === 'true'){
-     ttkh.value.items[0].name=getData.value.tenSach
-        ttkh.value.items[0].price=getData.value.giaBan
-        ttkh.value.amount = getData.value.giaBan
-        ttkh.value.price = getData.value.giaBan
-        ttkh.value.name = getData.value.tenSach
-        ttkh.value.items[0].maSach = getData.value.maSach
         ttkh.value.orderCode = null;
         localStorage.setItem("ttkh",JSON.stringify(ttkh.value))
         window.location.href='/thanh-cong'

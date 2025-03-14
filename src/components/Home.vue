@@ -1,13 +1,23 @@
 <script setup>
 import axios from 'axios';
-import { ref } from 'vue';
+import { onMounted, ref } from 'vue';
 import { useRouter } from 'vue-router';
 const router = useRouter(); // Đặt ở đầu
 
 
     let data = ref({
-        
+    
     })
+
+   onMounted(()=>{
+    if(JSON.parse(localStorage.getItem("gioHang"))===null){
+      let gioHang=[]
+    localStorage.setItem("gioHang",JSON.stringify(gioHang))
+    console.log(JSON.parse(localStorage.getItem("gioHang")))
+    }
+   }) 
+    
+
     axios.get("http://localhost:8080/").then(Response => {
         data.value = Response.data.result
     console.log(data.value)
@@ -59,22 +69,24 @@ const router = useRouter(); // Đặt ở đầu
     </div>
 
     <!-- Sản phẩm nổi bật -->
-    <div class="container mt-4">
-        <h2 class="text-center mb-4">Sản Phẩm Nổi Bật</h2>
-        <div class="row">
-            <div class="col-md-4 me-4 mb-3" v-for="list in data">
-                <div class="card"  >
-                    <img :src="list.img" class="card-img-top" alt="Sản phẩm 1">
-                    <div class="card-body">
-                        <h5 class="card-title">{{ list.tenSach }}</h5>
-                        <p class="card-text">{{ list.theLoai.tenTheLoai }}</p>
-                        <p class="card-text">{{ list.nhaXuatBan.tenNhaXuatBan }}</p>
-                        <p class="card-text text-danger fs-3 fw-bolder">{{ list.giaBan }} đ</p>
+    <div class="container mt-4 mb-4">
+    <h2 class="text-center mb-4">Sản Phẩm Nổi Bật</h2>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        <div class="col" v-for="list in data">
+            <div class="card h-100">
+                <img :src="list.img" class="card-img-top" alt="Sản phẩm">
+                <div class="card-body">
+                    <h5 class="card-title">{{ list.tenSach }}</h5>
+                    <p class="card-text">{{ list.theLoai.tenTheLoai }}</p>
+                    <p class="card-text">{{ list.nhaXuatBan.tenNhaXuatBan }}</p>
+                    <p class="card-text text-danger fs-3 fw-bolder">{{ list.giaBan }} đ</p>
+                    <div class="d-flex justify-content-between">
                         <a @click="goToResult(list.maSach)" class="btn btn-primary">Mua ngay</a>
-                        <a href="#" class="btn btn-outline-success ms-5">Thêm Vào Giỏ Hàng</a>
+                        <a href="#" class="btn btn-outline-success">Thêm Vào Giỏ Hàng</a>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </template>

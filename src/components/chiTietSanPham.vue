@@ -6,13 +6,38 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute();
 const id = route.params.id;
-let data = ref(null)
-  onMounted(() =>{    
-  axios.get(`http://localhost:8080/sach/details/${id}`).then(Response =>{
+let data = ref('')
+  onMounted(async() =>{    
+  await axios.get(`http://localhost:8080/sach/details/${id}`).then(Response =>{
    data.value = Response.data.result;
+   console.log(data.value);
   })
 }
 )
+
+ // Khởi tạo giỏ hàng rỗng
+let gioHang = JSON.parse(localStorage.getItem('gioHang'))
+console.log(JSON.parse(localStorage.getItem("gioHang")))
+let amount = 0;
+
+let themVaoGioHang = (maSach,name,price) =>{
+  let sanPham = gioHang.find(sp => sp.maSach === maSach);
+    if (sanPham) {
+        
+        sanPham.quantity += 1;
+        sanPham.amount = sanPham.quantity* sanPham.price
+    } else {
+        amount = amount + price
+        gioHang.push({ maSach,name,price,quantity: 1,amount});
+        console.log(gioHang);
+        
+    }
+    luuGioHang();
+}
+
+function luuGioHang() {
+    localStorage.setItem("gioHang", JSON.stringify(gioHang));
+}
 
      const goToResult = (id) => {
     router.push({ name: 'ResultPage1', params: { ma: id } });
@@ -58,7 +83,7 @@ let data = ref(null)
         </table>
         Giá Bán: <div class="fs-2 text-danger fw-bolder" v-if="data">{{ data.giaBan }} đ</div><br>
         <button class="btn btn-success mt-3" @click="goToResult(data.maSach)"> Mua Ngay</button>
-        <button class="btn btn-outline-danger ms-5 mt-3">Thêm vào giỏ hàng</button>
+        <button class="btn btn-outline-danger ms-5 mt-3" @click="themVaoGioHang(data.maSach,data.tenSach,data.giaBan)">Thêm vào giỏ hàng</button>
       </div>
     </div>
   </div>

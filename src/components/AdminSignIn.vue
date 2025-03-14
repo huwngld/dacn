@@ -43,27 +43,21 @@ const formData = ref({
   matKhau: "",
 });
 
+let token = ref()
 // Hàm submit form
 const submitForm = () => {
   axios
-    .post("http://localhost:8080/sign-in", formData.value, {
+    .post("http://localhost:8080/admin-sign-in", formData.value, {
       headers: {
         "Content-Type": "application/json",
       },
     })
-    .then((response) => {
-      if (response.data.trangThai) {
-        alert("thanh cong");
-        localStorage.removeItem("gioHang");
-        localStorage.setItem("dataKH", JSON.stringify(response.data.result));
-        localStorage.removeItem("token")
-        window.location.href = "/";
-      } else {
-        alert("sai tk mk");
-      }
+    .then((Response) => {
+        token.value = Response.data;
+        console.log(token.value);
+        localStorage.setItem("token",JSON.stringify(token.value))
+        localStorage.removeItem("dataKH")
+        window.location.href = "/xac-nhan-don-hang"
     })
-    .catch((error) => {
-      console.error("Lỗi khi gửi dữ liệu:", error);
-    });
 };
 </script>
