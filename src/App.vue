@@ -68,6 +68,17 @@ onMounted(()=>{
 const logout = () =>{
     localStorage.clear()
 }
+let timeout;
+
+document.addEventListener("mousemove", function() {
+  
+
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+       this.location.reload()
+       localStorage.clear()
+    }, 6000000);
+});
 
 
 </script>
