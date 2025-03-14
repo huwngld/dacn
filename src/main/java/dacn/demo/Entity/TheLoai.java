@@ -1,5 +1,6 @@
 package dacn.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
@@ -16,6 +17,7 @@ public class TheLoai {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maTheLoai;
     private String tenTheLoai;
+    @JsonIgnore
     @OneToMany(mappedBy = "theLoai",cascade = CascadeType.ALL)
     private List<Sach> sach;
 }

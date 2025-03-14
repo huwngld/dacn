@@ -4,6 +4,8 @@ package dacn.demo.Entity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.BatchSize;
+
 import java.util.Date;
 import java.util.List;
 
@@ -13,8 +15,10 @@ import java.util.List;
 @AllArgsConstructor
 @Entity
 @Table(name = "HoaDon")
+@Builder
 public class HoaDon {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String maHoaDon;
 
     @ManyToOne
@@ -27,8 +31,8 @@ public class HoaDon {
 
     private Date ngayLap;
     private double tongTien;
-
-    @JsonIgnore
+    private String trangThai;
+    @BatchSize(size = 1)
     @OneToMany(mappedBy = "hoaDon",cascade = CascadeType.ALL)
     private List<ChiTietHoaDon> chiTietHoaDon;
 }

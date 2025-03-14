@@ -13,11 +13,14 @@ import org.springframework.stereotype.Service;
 @Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
-public class SignInApp {
+public class SignInService {
     KhachHangRepo kh;
-    public boolean si(SignInRequest signInRequest){
+    public KhachHang si(SignInRequest signInRequest){
         BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
         KhachHang tk = kh.findKhachHangByTaiKhoan(signInRequest.getTaiKhoan());
-        return encoder.matches(signInRequest.getMatKhau(), tk.getMatKhau());
+        if(encoder.matches(signInRequest.getMatKhau(), tk.getMatKhau())){
+            return tk;
+        }
+        return null;
     }
 }

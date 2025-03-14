@@ -3,16 +3,18 @@ import java.util.*;
 
 import org.apache.commons.codec.digest.HmacUtils;
 import org.json.JSONObject;
+import org.springframework.stereotype.Component;
 
-public class Convert {
+@Component
+public class ConvertData {
 
-    static String checksumKey = "3a7b4b73373ad9e1d41ae2898ac43b5326b18de2ce648ee1d1893912b9c4528b";
+    public static String checksumKey = "3a7b4b73373ad9e1d41ae2898ac43b5326b18de2ce648ee1d1893912b9c4528b";
+//
+//    public static String transaction = "{'amount':2,'cancelUrl':'https://your-cancel-url.com','description':'2','orderCode':125,'returnUrl':'https://your-success-url.com'}";
 
-    static String transaction = "";
+//    public  static String transaction = "{'amount':50000,'cancelUrl':'https://your-cancel-url.com','description':'nhanh','orderCode':331,'returnUrl':'https://your-success-url.com'}"
 
-    static String transactionSignature = "";
-
-    public static Boolean isValidData(String transaction, String transactionSignature) {
+    public static String isValidData(String transaction) {
         try {
             JSONObject jsonObject = new JSONObject(transaction);
             Iterator<String> sortedIt = sortedIterator(jsonObject.keys(), (a, b) -> a.compareTo(b));
@@ -30,11 +32,13 @@ public class Convert {
             }
 
             String signature = new HmacUtils("HmacSHA256", checksumKey).hmacHex(transactionStr.toString());
-            return signature.equals(transactionSignature);
+            System.out.println(transaction);
+            System.out.println(signature);
+            return signature;
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return false;
+        return "";
     }
 
     public static Iterator<String> sortedIterator(Iterator<?> it, Comparator<String> comparator) {
@@ -47,7 +51,4 @@ public class Convert {
         return list.iterator();
     }
 
-    public static void main(String[] args) {
-        System.out.println(isValidData(transaction, transactionSignature));
-    }
 }

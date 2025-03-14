@@ -9,4 +9,10 @@ spring:
     hibernate:
       naming:
         physical-strategy: org.hibernate.boot.model.naming.PhysicalNamingStrategyStandardImpl
+  data:
+    redis:
+      host: localhost
+      port: 6379
+application:
+  key: "BUEvBn8Xo6KGDYR154nDazlf5LaehuVNGuI20JkWOUxdUbmxaAHtjVrbHQgU9YKJ"
 

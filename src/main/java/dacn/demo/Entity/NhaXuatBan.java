@@ -1,5 +1,6 @@
 package dacn.demo.Entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.List;
@@ -19,6 +20,7 @@ public class NhaXuatBan {
     private String diaChi;
     private String sdt;
     private String email;
+    @JsonIgnore
     @OneToMany(mappedBy = "nhaXuatBan",cascade = CascadeType.ALL)
     private List<Sach> sach;
 }

@@ -1,6 +1,7 @@
 package dacn.demo.Entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
 import java.util.Date;
@@ -17,6 +18,8 @@ public class Sach {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int maSach;
+
+    private String img;
     private String tenSach;
 
     @ManyToOne
@@ -32,7 +35,7 @@ public class Sach {
     private NhaXuatBan nhaXuatBan;
     private int soLuongTon;
     private double giaBan;
-    private String viTri;
-    @OneToMany(mappedBy = "sach")
+    @JsonIgnore
+    @OneToMany(mappedBy = "sach",cascade = CascadeType.ALL)
     private List<ChiTietHoaDon> chiTietHoaDon;
 }
