@@ -15,12 +15,14 @@ import lombok.AccessLevel;
 import lombok.RequiredArgsConstructor;
 import lombok.experimental.FieldDefaults;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Date;
 import java.util.List;
 
-@RestController
+//@RestController
+@Service
 @RequiredArgsConstructor
 @FieldDefaults(level = AccessLevel.PRIVATE,makeFinal = true)
 public class HoaDonService {
@@ -61,5 +63,11 @@ public class HoaDonService {
     }
     public List<HoaDon> getAll(){
         return hoaDon.findAll();
+    }
+    public List<HoaDon> timKien(String sdt){
+//        System.out.println(sdt);
+//        List<KhachHang> dt = kh.findKhachHangBySdt(sdt);
+//        return hoaDon.findByKhachHang(dt);
+        return hoaDon.findByKhachHang_Sdt(sdt);
     }
 }
