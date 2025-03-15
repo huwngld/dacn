@@ -144,6 +144,8 @@ const guiForm = () => {
       alert("Đăng kí thành công");
       window.location.href = "/login";
     })
-    .catch();
+    .catch(()=>{
+            window.location.href="/error"
+        });
 };
 </script>

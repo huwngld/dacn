@@ -62,9 +62,9 @@ const getDl = () => {
         console.log("Thêm sách thành công:", response.data);
         alert('Thêm sách thành công')
     })
-    .catch(error => {
-        console.error("Lỗi khi thêm sách:", error);
-    });
+    .catch(()=>{
+            window.location.href="/error"
+        })
 };
 
 

@@ -77,7 +77,9 @@ let f = ref()
          }
      }).then(Response =>{
        ttkh.value.signature = Response.data 
-     })
+     }).catch(()=>{
+            window.location.href="/error"
+        })
         call()
     
     }
@@ -94,7 +96,9 @@ const call = () =>{
     }).then(Response =>{
         localStorage.setItem("ttkh",JSON.stringify(ttkh.value))        
         window.location.href = Response.data.data.checkoutUrl
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
 }
 const test =async ()=>{
     if(qrcode.value.gt === 'true'){

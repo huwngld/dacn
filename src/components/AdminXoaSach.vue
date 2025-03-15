@@ -35,7 +35,9 @@ let data=ref()
     }).then(Response=>{
         data.value  = Response.data.result
         console.log(data.value);
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
 
 function xoa(index){
     console.log(index);
@@ -47,6 +49,8 @@ function xoa(index){
     }).then(Response=>{
         data.value  = Response.data.result
         console.log(data.value);
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
 }
 </script>

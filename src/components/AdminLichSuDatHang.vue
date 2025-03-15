@@ -51,7 +51,8 @@ import { onMounted, ref } from 'vue';
     .then(Response =>{
         data.value = Response.data
         console.log(data.value);   
-    }) 
-        
+    }).catch(()=>{
+            window.location.href="/error"
+        })    
     })
 </script>

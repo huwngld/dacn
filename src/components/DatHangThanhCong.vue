@@ -9,7 +9,7 @@
             </div>
             <h2 class="mt-3 text-success">Đặt Hàng Thành Công!</h2>
             <p class="text-muted">Cảm ơn bạn đã mua hàng. Đơn hàng của bạn đã được xác nhận.</p>
-            <!-- Nút hành động -->
+
             <div class="mt-4">
                 <a href="/" class="btn btn-primary">Quay lại trang chủ</a>
             </div>
@@ -52,7 +52,9 @@ import { onMounted, ref } from 'vue';
         }).then(Response =>(
             status.value = Response.data.data.status,
             ttkh.value.trangThai = Response.data.data.status
-        ))    
+        )).catch(()=>{
+            window.location.href="/error"
+        })    
        }
        if(status.value !== 'CANCELLED'){
             axios.post("http://localhost:8080/admin/luu-don-hang",ttkh.value,{
@@ -62,7 +64,9 @@ import { onMounted, ref } from 'vue';
             }).then(Response=>{
                 console.log(Response.data);
                 
-            })
+            }).catch(()=>{
+            window.location.href="/error"
+        })
         }
     })
     

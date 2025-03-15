@@ -15,7 +15,8 @@ import XacNhanDonHang from "@/components/XacNhanDonHang.vue";
 import AdminSignIn from "@/components/AdminSignIn.vue";
 import AdminXoaSach from "@/components/AdminXoaSach.vue";
 import TrangThaiDonHang from "@/components/TrangThaiDonHang.vue";
-
+import error from "@/components/error404.vue";
+import Erorr500 from "@/components/erorr500.vue";
 const routes = [
   {
     path: "/",
@@ -68,16 +69,23 @@ const routes = [
     component: AdminSignIn,
   },
   {
-    path:"/them-sach",
+    path: "/them-sach",
     component: Sach,
   },
   {
-    path:"/hien-thi",
-    component: AdminXoaSach
+    path: "/hien-thi",
+    component: AdminXoaSach,
   },
   {
-    path:"/trang-thai",
-    component: TrangThaiDonHang
+    path: "/trang-thai",
+    component: TrangThaiDonHang,
+  },{
+    path: "/error",
+    component: Erorr500,
+  },
+  {
+    path: "/:catchAll(.*)",
+    component: error,
   }
 ];
 

@@ -61,6 +61,8 @@ import { nextTick, onMounted, ref } from 'vue';
             data.value = Response.data
             console.log(data.value);
             nextTick();
+        }).catch(()=>{
+            window.location.href="/error"
         })
     }
 </script>

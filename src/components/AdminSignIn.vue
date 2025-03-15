@@ -58,6 +58,8 @@ const submitForm = () => {
         localStorage.setItem("token",JSON.stringify(token.value))
         localStorage.removeItem("dataKH")
         window.location.href = "/xac-nhan-don-hang"
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
 };
 </script>

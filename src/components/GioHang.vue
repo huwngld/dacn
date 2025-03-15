@@ -42,35 +42,35 @@ const click = () =>{
   console.log(JSON.parse(localStorage.getItem("gioHang")));
    window.location.href="/thanh-toan-gio-hang"
 }
-// Lấy dữ liệu từ localStorage (hoặc mảng rỗng nếu chưa có)
+
 const gioHang = ref(JSON.parse(localStorage.getItem("gioHang")) || []);
 
 console.log(gioHang.value);
 
 
-// Tính tổng tiền dựa trên số lượng và giá
+
 const tongTien = computed(() => {
 return gioHang.value.reduce((total, item) => total + item.price * item.quantity, 0);
   
 });
 
-// Hàm cập nhật số lượng
+
 const changeQuantity = (index, amount) => {
   gioHang.value[index].quantity += amount;
   gioHang.value[index].amount = 0;
   gioHang.value[index].amount = gioHang.value[index].amount + gioHang.value[index].price * gioHang.value[index].quantity
-  // Nếu số lượng <= 0, xóa sản phẩm khỏi giỏ hàng
+
   if (gioHang.value[index].quantity <= 0) {
     gioHang.value.splice(index, 1);
   }
 };
 
-// Hàm xóa sản phẩm khỏi giỏ hàng
+
 const removeProduct = (index) => {
   gioHang.value.splice(index, 1);
 };
 
-// Tự động cập nhật localStorage khi `gioHang` thay đổi
+
 watch(gioHang, () => {
   localStorage.setItem("gioHang", JSON.stringify(gioHang.value));
   console.log(localStorage.getItem("gioHang"));  

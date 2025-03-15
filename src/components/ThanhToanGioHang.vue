@@ -58,7 +58,9 @@ let f = ref()
          }
      }).then(Response =>{
        ttkh.value.signature = Response.data 
-     })
+     }).catch(()=>{
+            window.location.href="/error"
+        })
         call()
     
     }
@@ -77,7 +79,9 @@ const call = () =>{
         console.log(JSON.parse(localStorage.getItem("ttkh")));
         // window.location.href = "/thanh-cong"
         window.location.href = Response.data.data.checkoutUrl
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
 }
 const test =async ()=>{
     if(qrcode.value.gt === 'true'){

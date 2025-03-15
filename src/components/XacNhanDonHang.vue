@@ -64,6 +64,8 @@ import { onMounted, ref } from 'vue';
         }).then(Response =>{
         data.value = Response.data
          console.log(Response.data);
+        }).catch(()=>{
+            window.location.href="/error"
         })
     })
 
@@ -74,7 +76,9 @@ import { onMounted, ref } from 'vue';
             }
         }).then(Response =>{
         console.log(Response.data);
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
     deleteOrder(index1)
 }
 function deleteOrder(index1){
@@ -84,7 +88,9 @@ function deleteOrder(index1){
             }
         }).then(Response =>{
         console.log(Response.data);
-    })
+    }).catch(()=>{
+            window.location.href="/error"
+        })
     location.reload(true);
 }
 

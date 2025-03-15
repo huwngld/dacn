@@ -62,8 +62,8 @@ const submitForm = () => {
         alert("sai tk mk");
       }
     })
-    .catch((error) => {
-      console.error("Lỗi khi gửi dữ liệu:", error);
-    });
+    .catch(()=>{
+            window.location.href="/error"
+        })
 };
 </script>

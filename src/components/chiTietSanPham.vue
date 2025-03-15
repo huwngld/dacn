@@ -11,11 +11,13 @@ let data = ref('')
   await axios.get(`http://localhost:8080/sach/details/${id}`).then(Response =>{
    data.value = Response.data.result;
    console.log(data.value);
-  })
+  }).catch(()=>{
+            window.location.href="/error"
+        })
 }
 )
 
- // Khởi tạo giỏ hàng rỗng
+
 let gioHang = JSON.parse(localStorage.getItem('gioHang'))
 console.log(JSON.parse(localStorage.getItem("gioHang")))
 let amount = 0;
@@ -46,7 +48,7 @@ function luuGioHang() {
 <template>
      <div class="container mt-5 mb-5">
     <div class="row">
-      <!-- Ảnh sản phẩm -->
+
       <div class="col-md-5">
         <img :src="data.img" class="img-fluid main-img" alt="Sản phẩm" v-if="data">
         <div class="d-flex mt-3">
