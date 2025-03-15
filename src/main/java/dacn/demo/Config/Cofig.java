@@ -50,10 +50,10 @@ public class Cofig implements WebMvcConfigurer {
     };
     @Bean
     public JwtAuthenticationConverter jwtAuthenticationConverter(){
-        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();//tìm kiếm claim set có name bằng scope
-        authoritiesConverter.setAuthorityPrefix("ROLE_");// set tiền tố bằng trống
+        JwtGrantedAuthoritiesConverter authoritiesConverter = new JwtGrantedAuthoritiesConverter();
+        authoritiesConverter.setAuthorityPrefix("ROLE_");
         JwtAuthenticationConverter authenticationConverter = new JwtAuthenticationConverter();
-        authenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter); //gán granted và authen để set tiền tố
+        authenticationConverter.setJwtGrantedAuthoritiesConverter(authoritiesConverter);
         return authenticationConverter;
     }
 
@@ -73,7 +73,7 @@ public class Cofig implements WebMvcConfigurer {
     }
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {
-        // Tạo Standalone Connection tới Redis
+
         return new LettuceConnectionFactory(new RedisStandaloneConfiguration(host, port));
     }
 
