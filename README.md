@@ -1,5 +1,5 @@
 # TECHNICAL
--Front-end: Vue.js, Bootstrap 5
+-Front-end: Vue.js, Bootstrap 5, Axios
 
 -Back-end: Spring Boot, Spring Security, Hibernate
 
