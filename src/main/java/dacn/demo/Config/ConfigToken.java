@@ -23,7 +23,7 @@ public class ConfigToken implements JwtDecoder {
     @Override
     public Jwt decode(String token) throws JwtException {
 
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(),"HS512");//dùng để tạo ra 1 bộ giải mã từ key và thuật toán sau khi decoder sẽ ra jwt
-        return NimbusJwtDecoder.withSecretKey(secretKeySpec).macAlgorithm(MacAlgorithm.HS512).build().decode(token);//cung cấp secretkey và thuật toán để giải mã và decode để trả ra 1 jwt token
+        SecretKeySpec secretKeySpec = new SecretKeySpec(key.getBytes(),"HS512");
+        return NimbusJwtDecoder.withSecretKey(secretKeySpec).macAlgorithm(MacAlgorithm.HS512).build().decode(token);
     }
 }
