@@ -31,7 +31,7 @@ public class uploadAnhService {
         Path filePath = Paths.get(UPLOAD_DIR + fileName);
         Files.write(filePath, file.getBytes());
 
-        // Trả về đường dẫn có thể truy cập
+
         return "/uploads/" + fileName;
     }
 }
