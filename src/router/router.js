@@ -14,6 +14,7 @@ import AdminLichSuDatHang from "@/components/AdminLichSuDatHang.vue";
 import XacNhanDonHang from "@/components/XacNhanDonHang.vue";
 import AdminSignIn from "@/components/AdminSignIn.vue";
 import AdminXoaSach from "@/components/AdminXoaSach.vue";
+import TrangThaiDonHang from "@/components/TrangThaiDonHang.vue";
 
 const routes = [
   {
@@ -73,6 +74,10 @@ const routes = [
   {
     path:"/hien-thi",
     component: AdminXoaSach
+  },
+  {
+    path:"/trang-thai",
+    component: TrangThaiDonHang
   }
 ];
 

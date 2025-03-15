@@ -11,7 +11,7 @@
                 <ul class="navbar-nav ms-auto">
                     <li class="nav-item"><RouterLink to="/gio-hang" class="nav-link text-white text-decoration-none">Giỏ hàng</RouterLink></li>
                     <li class="nav-item text-white mt-2" v-if="data!=null">Xin Chào: {{ data.tenKhachHang }}</li>
-                    <li class="nav-item text-white mt-2" v-if="token!=null">Xin Chào: admin</li>
+                    <li class="nav-item "><RouterLink to="/trang-thai" class="nav-link text-white text-decoration-none">Tìm Kiếm Đơn Hàng</RouterLink></li>
                     <li class="nav-item"><RouterLink to="/" class="nav-link text-white text-decoration-none">Home</RouterLink></li>
                     <li class="nav-item" v-if="data==null"><RouterLink to="/login" class="nav-link text-white">Login</RouterLink></li>
                     <li class="nav-item" v-if="data==null"><RouterLink to="/register" class="nav-link text-white">Register</RouterLink></li>
@@ -77,7 +77,7 @@ document.addEventListener("mousemove", function() {
     timeout = setTimeout(() => {
        this.location.reload()
        localStorage.clear()
-    }, 6000000);
+    }, 600000);
 });
 
 
