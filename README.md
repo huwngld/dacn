@@ -14,5 +14,5 @@
 -API Communication: RESTful APIs
 
 
-#Note
-`back end` folder is located in a different branch
+# Note
+`back-end` folder is not in this branch. It exists in a different branch. 
