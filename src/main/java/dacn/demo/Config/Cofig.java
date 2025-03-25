@@ -68,8 +68,8 @@ public class Cofig implements WebMvcConfigurer {
     }
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
-        registry.addResourceHandler("/uploads/**")
-                .addResourceLocations("file:uploads/");
+        registry.addResourceHandler("/uploads/**")//Xác định URL nào sẽ kích hoạt tìm tài nguyên.
+                .addResourceLocations("file:uploads/");//Xác định thư mục chứa tài nguyên mà Spring sẽ tìm kiếm.
     }
     @Bean
     public LettuceConnectionFactory redisConnectionFactory() {

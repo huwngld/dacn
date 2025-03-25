@@ -23,10 +23,8 @@ public class LichSuDatHang {
     HoaDonService hd;
     @PreAuthorize("hasRole('ROLE_STAFF')")
     @GetMapping("/lich-su-dat-hang")
-    public List<HoaDon> getAll1(){
+    public List<HoaDon> getAll1() throws Exception {
         var context = SecurityContextHolder.getContext().getAuthentication();
-        context.getAuthorities().forEach(req -> log.info(req.getAuthority()));
-        context.getAuthorities().forEach(req -> System.out.println(req.getAuthority()));
         return hd.getAll();
     }
 }
